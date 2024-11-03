@@ -221,7 +221,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -536,4 +536,17 @@ cmp.setup {
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=4 sts=4 sw=4 et
+
+-- custom
+
+-- vim.opt.tabstop = 4
+-- vim.opt.shiftwidth = 4
+
+vim.opt.relativenumber = true
+vim.g.vimtex_view_method = 'skim'
+
+vim.api.nvim_set_hl(0, 'LineNr', { fg = "white"})
+vim.api.nvim_set_hl(0, '@comment', { fg = 'white'})
+vim.api.nvim_set_hl(0, '@lsp.type.comment', { fg = 'white'})
+vim.api.nvim_set_hl(0, 'Comment', { fg = 'white'})
