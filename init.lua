@@ -894,20 +894,22 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    -- 'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
+      require('catppuccin').setup {
+        flavour = 'frappe',
+        transparent_background = true,
       }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'catppuccin'
+      -- vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
 
@@ -947,6 +949,20 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
+      -- Automagic pairing braces and strings
+      require('mini.pairs').setup()
+      -- Commenting with 'gcc'
+      require('mini.comment').setup({
+        options = {
+          custom_commentstring = function()
+            -- Use // comments for C++ files
+            if vim.bo.filetype == 'cpp' then
+              return '// %s'
+            end
+            return nil -- fallback to commentstring
+          end,
+        },
+      })
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -957,7 +973,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'cpp' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1034,9 +1050,10 @@ require('lazy').setup({
 -- vim.opt.shiftwidth = 4
 
 vim.opt.relativenumber = true
+vim.opt.expandtab = true
 vim.g.vimtex_view_method = 'skim'
 
-vim.api.nvim_set_hl(0, 'LineNr', { fg = "white"})
-vim.api.nvim_set_hl(0, '@comment', { fg = 'white'})
-vim.api.nvim_set_hl(0, '@lsp.type.comment', { fg = 'white'})
-vim.api.nvim_set_hl(0, 'Comment', { fg = 'white'})
+-- vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, '@comment', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, '@lsp.type.comment', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, 'Comment', { fg = 'white' })
