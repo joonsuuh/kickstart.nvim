@@ -952,17 +952,17 @@ require('lazy').setup({
       -- Automagic pairing braces and strings
       require('mini.pairs').setup()
       -- Commenting with 'gcc'
-      require('mini.comment').setup({
+      require('mini.comment').setup {
         options = {
           custom_commentstring = function()
             -- Use // comments for C++ files
-            if vim.bo.filetype == 'cpp' then
+            if vim.tbl_contains({ 'cpp', 'cuda' }, vim.bo.filetype) then
               return '// %s'
             end
             return nil -- fallback to commentstring
           end,
         },
-      })
+      }
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
