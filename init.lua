@@ -370,7 +370,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', opts = {} },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -1025,6 +1025,23 @@ require('lazy').setup({
   {
     'vyfor/cord.nvim',
     run = ':Cord update',
+    config = function()
+      require('cord').setup {
+        editor = {
+          -- client = 'neovim',
+          tooltip = 'CUDA MA BALLS',
+          -- icon = nil,
+        },
+        buttons = {
+          {
+            label = 'View Repository',
+            url = function(opts)
+              return opts.repo_url
+            end,
+          },
+        },
+      }
+    end,
   },
 }, {
   ui = {
